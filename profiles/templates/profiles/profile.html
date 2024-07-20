@@ -1,0 +1,175 @@
+<head>
+  {% extends 'base.html' %}
+  {% load static %}
+  {% block title %} Securedoc DMS | {{profile.user}}{% endblock title %}
+  {% load widget_tweaks %}
+  <style>
+      body {
+          background-color: #d3d3d3;
+          font-family: Arial, sans-serif;
+      }
+      #navbarMainDiv {
+          background-color: #001f3f;
+          padding: 10px;
+      }
+      #navbarMainDiv .item {
+          color: #ffffff;
+          padding: 10px 20px;
+          font-weight: bold;
+      }
+      #uploadParentDiv {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 80vh;
+          margin: 0 auto;
+      }
+      #uploadSegmentDiv {
+          width: 500px;
+          background-color: #ffffff;
+          box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+          border-radius: 10px;
+          padding: 20px;
+          text-align: center;
+      }
+      .ui.form .field > label {
+          font-weight: bold;
+          margin-bottom: 5px;
+          display: block;
+      }
+      .ui.form .field > input[type="text"] {
+          border: 1px solid #dddddd;
+          border-radius: 4px;
+          padding: 10px;
+          width: 100%;
+          box-sizing: border-box;
+          margin-bottom: 20px;
+      }
+      .ui.button {
+          background-color: #007bff;
+          color: #ffffff;
+          border-radius: 4px;
+          padding: 10px 20px;
+          border: none;
+          cursor: pointer;
+          margin-top: 20px;
+      }
+      .ui.button:hover {
+          background-color: #0056b3;
+      }
+      .dropzone {
+          border: 2px dashed #007bff;
+          border-radius: 10px;
+          padding: 40px;
+          background-color: #ffffff;
+          cursor: pointer;
+          margin-bottom: 20px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          transition: background-color 0.3s ease;
+      }
+      .dropzone:hover {
+          background-color: #f1f1f1;
+      }
+      .dropzone p {
+          color: #007bff;
+          font-size: 18px;
+          margin: 0;
+      }
+      .uploaded-files {
+          text-align: left;
+          margin-top: 20px;
+      }
+      .uploaded-files .file-item {
+          margin-bottom: 10px;
+      }
+  </style>
+</head>
+
+{% block content %}
+<div class="ui inverted blue secondary pointing menu" id="navbarMainDiv">
+  <a class="item" href="{% url 'documents:home' %}"><b>Home</b></a>
+  <a class="item" href="{% url 'documents:uploadDoc' %}"><b>Upload</b></a>
+  <a class="item active" href="{% url 'profiles:profile' %}"><b>{{profile.user}}</b></a>
+  <a class="item" href="{% url 'documents:logout' %}"><b>Log Out</b></a>
+</div>
+
+  <div id="profileParentDiv">
+
+    <div class="ui segment" id="profileSegmentDiv">
+        <h4 class="ui header" id="homeSearchSystemName">Securedoc Document Management System</h4>
+        
+        <img class="ui small circular image" src={{profile.profilePicture.url}}>
+
+        <a onclick="profileEdit()" class="mini ui basic button" id="profileEditBtn">Edit Profile</a>
+
+        <div id="profileItemChildDiv">
+          <div id="profileInfoDiv">
+            <div id="profileLabel"><a class="ui basic label">Username</a></div>
+            {% if profile.user %}
+              <div class="description" id="profileInfoItem">{{profile.user}}</div>
+            {% else %}
+              <div class="description" id="profileInfoItem">{{profile.user}}</div>
+            {% endif %}
+          </div>
+
+          <div id="profileInfoDiv">
+            <div id="profileLabel"><a class="ui basic label">Documents</a></div>
+            <div class="description" id="profileInfoItem">{{totalDocs.count}}</div>
+          </div>
+        </div>
+
+
+        <div id="profileItemChildDiv">
+          <div id="profileInfoDiv">
+            <div id="profileLabel"><a class="ui basic label">First Name</a></div>
+            {% if profile.firstName %}
+              <div class="description" id="profileInfoItem">{{profile.firstName}}</div>
+            {% else %}
+              <div class="description" id="profileInfoItem"><p>Empty</p></div>
+            {% endif %}
+            </div>
+  
+          <div id="profileInfoDiv">
+            <div id="profileLabel"><a class="ui basic label">Last Name</a></div>
+            {% if profile.lastName %}
+              <div class="description" id="profileInfoItem">{{profile.lastName}}</div>
+            {% else %}
+              <div class="description" id="profileInfoItem"><p>Empty</p></div>
+            {% endif %}
+          </div>
+
+        </div>
+
+
+        <div id="profileItemChildDiv">
+          <div id="profileInfoDiv">
+            <div id="profileLabel"><a class="ui basic label">Org Name</a></div>
+            {% if profile.organisation %}
+                <div class="description" id="profileInfoItem">{{profile.organisation}}</div>
+            {% else %}
+            <div class="description" id="profileInfoItem"><p>Empty</p></div>
+            {% endif %}
+          </div>
+  
+          <div id="profileInfoDiv">
+            <div id="profileLabel"><a class="ui basic label">Email</a></div>
+            {% if profile.email %}
+                <div class="description" id="profileInfoItem">{{profile.email}}</div>
+            {% else %}
+                <div class="description" id="profileInfoItem"><p>Empty</p></div>
+            {% endif %}
+          </div>
+        </div>
+
+    </div>
+  </div>
+
+{% endblock content %}
+{% block scripts %}
+<script type="text/javascript">
+function profileEdit(){ window.location.href = "{% url 'profiles:editProfile' %}"; }
+</script>
+{% endblock scripts %}

@@ -1,0 +1,40 @@
+<head>
+    {% extends 'base.html' %}
+    {% load static %}
+    {% block title %} Securedoc DMS | {{document.title}}{% endblock title %}  
+    {% load widget_tweaks %} 
+  </head>
+  
+{% block content %}
+<div class="ui secondary pointing menu" id="navbarMainDiv">
+    <a class="item" href="{% url 'documents:home' %}"><b>Home</b></a>
+</div>
+  
+<div id="uploadParentDiv">
+    
+    <div class="ui container" id="documentContPar">
+    <h2>{{ document.title }}</h2>
+    <div class="ui segment" id="documentCont">
+    {{ html|safe }}
+    </div>
+    </div>
+
+    
+</div>
+{% endblock content %}
+
+{% block scripts %}
+<style>
+    #documentContPar {
+        width: 100%;
+        overflow-y: auto;
+    }
+
+    #documentCont {
+        width: 100%;
+        overflow-y: auto;
+    }
+</style>
+{% endblock scripts %}
+</body>
+</html>

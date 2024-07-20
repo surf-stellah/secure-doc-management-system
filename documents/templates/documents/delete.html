@@ -1,0 +1,42 @@
+<head>
+    {% extends 'base.html' %}
+    {% load static %}
+    {% block title %} Securedoc DMS | Delete{% endblock title %}  
+    {% load widget_tweaks %} 
+  </head>
+  
+{% block content %}
+    <div class="ui secondary pointing menu" id="navbarMainDiv">
+        <a class="item" href="{% url 'documents:home' %}"><b>Home</b></a>
+        <a class="item" href="{% url 'documents:uploadDoc' %}"><b>Upload</b></a>
+        <a class="item" href="{% url 'profiles:profile' %}"><b>{{profile.user}}</b></a>
+        <a class="item" href="{% url 'documents:logout' %}"><b>Log Out</b></a>
+    </div>
+    
+    <div id="uploadParentDiv">
+
+        <div class="ui card" id="uploadSegmentDiv">
+            <div class="content">
+                <div class="header">Confirm Delete</div>
+                <div class="meta">{{document.created|date:"F d, Y"}}</div>
+                <div class="description"><p>Are you sure you want to delete the document - {{document.title}} ?</p></div>
+            </div>
+
+            <div id="documentDeleteDiv">
+                <form method="post" action="{% url 'documents:deleteDocument' document.id %}" id="documentDeleteForm">
+                    {% csrf_token %}
+                    <button class="mini ui red basic button">Confirm</button>
+                </form>
+
+                <a class="mini ui grey basic button" href="{% url 'documents:home' %}">Cancel</a>
+            </div>
+        </div>
+
+    </div>
+{% endblock content %}
+
+{% block scripts %}
+<script type="text/javascript">
+
+</script>
+{% endblock scripts %}

@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ document.title }}</title>
+</head>
+<body>
+    <h1>{{ document.title }}</h1>
+    {% for sheet_name, html in html_tables.items %}
+        <h2>{{ sheet_name }}</h2>
+        <div>{{ html|safe }}</div>
+    {% endfor %}
+</body>
+</html>

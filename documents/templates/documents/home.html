@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% extends 'base.html' %}
+    {% load static %}
+    {% block title %} Securedoc DMS | Home{% endblock title %}
+    {% load widget_tweaks %}
+</head>
+<body>
+{% block content %}
+    <div class="ui secondary pointing blue inverted menu" id="navbarMainDiv">
+        <a class="item active" href="{% url 'documents:home' %}"><i class="home icon"></i> <b>Home</b></a>
+        <a class="item" href="{% url 'documents:uploadDoc' %}"><i class="upload icon"></i> <b>Upload</b></a>
+        <a class="item" href="{% url 'profiles:profile' %}"><i class="user icon"></i> <b>{{profile.user}}</b></a>
+        <a class="item" href="{% url 'documents:logout' %}"><i class="sign out alternate icon"></i> <b>Log Out</b></a>
+    </div>
+
+    <div class="ui grid" id="homeParentDiv">
+        <!-- Sidebar for document type filtering -->
+        <div class="three wide column" id="sidebarColumn">
+            <div class="ui vertical inverted menu" id="sidebarMenu">
+                <div class="item">
+                    <div class="header">Document Types</div>
+                </div>
+                <a class="item" data-filter="all">
+                    <i class="file icon"></i>
+                    All
+                </a>
+                <a class="item" data-filter="pdf">
+                    <i class="file pdf outline icon"></i>
+                    PDF
+                </a>
+                <a class="item" data-filter="xlsx">
+                    <i class="file excel outline icon"></i>
+                    Spreadsheets
+                </a>
+                <a class="item" data-filter="txt">
+                    <i class="file text outline icon"></i>
+                    Texts
+                </a>
+                <a class="item" data-filter="docx">
+                    <i class="file word outline icon"></i>
+                    Word Documents
+                </a>
+                <a class="item" data-filter="png" data-filter="jpg" data-filter="jpeg" data-filter="gif">
+                    <i class="file image outline icon"></i>
+                    Images
+                </a>
+            </div>
+        </div>
+
+        <!-- Main content area -->
+        <div class="thirteen wide column" id="mainContentColumn">
+            <div class="ui secondary menu" id="homeSearchDiv">
+                <h4 class="ui header blue" id="homeSearchSystemName">SecureDoc Document Management System</h4>
+
+                <div class="right menu">
+                    <form method="GET" action="" id="homeSearchForm" class="ui form">
+                        <div class="ui action input" id="homeSearchInput">
+                            <input type="text" name="search" placeholder="Search..." value="{{ request.GET.search }}">
+                            <button class="ui icon button blue" type="submit" id="homeSearchBtn"><i class="search icon"></i></button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="ui segment" id="homeSegmentDiv">
+                {% for document in documents %}
+                <div id="homeItemCardDiv" class="document-item ui raised segment" data-type="{{ document.fileType }}">
+                    <table class="ui blue striped table fixed" id="homeTable">
+                        <colgroup>
+                            <col width="20%">
+                            <col width="15%">
+                            <col width="10%">
+                            <col width="10%">
+                            <col width="15%">
+                            <col width="10%">
+                            <col width="10%">
+                            <col width="10%">
+                        </colgroup>
+                        <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Owner</th>
+                            <th>Type</th>
+                            <th>Size</th>
+                            <th>Created</th>
+                            <th>Download</th>
+                            <th>View</th>
+                            <th>Delete</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td class="truncate">{{document.title}}</td>
+                            <td>{{document.owner}}</td>
+                            <td class="center aligned">
+                                {% if document.fileType == 'pdf' %}
+                                <a class="ui red label">{{document.fileType}}</a>
+                                {% elif document.fileType == 'xlsx' %}
+                                <a class="ui green label">{{document.fileType}}</a>
+                                {% elif document.fileType == 'docx' %}
+                                <a class="ui blue label">{{document.fileType}}</a>
+                                {% elif document.fileType == 'txt' %}
+                                <a class="ui label">{{document.fileType}}</a>
+                                {% elif document.fileType == 'png' or document.fileType == 'jpeg' or document.fileType == 'jpg' %}
+                                <a class="ui purple label">{{document.fileType}}</a>
+                                {% endif %}
+                            </td>
+                            <td>{% if document.fileSize %}{{ document.fileSize|filesizeformat }}{% endif %}</td>
+                            <td>{{document.created|date:"F d, Y"}}</td>
+                            <td class="center aligned">
+                                <a class="ui blue icon button" href="{% url 'documents:downloadFile' document.id %}">
+                                    <i class="download icon"></i>
+                                </a>
+                            </td>
+                            <td class="center aligned">
+                                {% if document.fileType == 'pdf' %}
+                                    <a href="{% url 'documents:openPdf' document.id %}" class="ui basic button">View File</a>
+                                {% elif document.fileType == 'xlsx' %}
+                                    <a href="{% url 'documents:openExcel' document.id %}" class="ui basic button">View File</a>
+                                {% elif document.fileType == 'docx' %}
+                                    <a href="{% url 'documents:openDocx' document.id %}" class="ui basic button">View File</a>
+                                {% elif document.fileType == 'txt' %}
+                                    <a href="{% url 'documents:openText' document.id %}" class="ui basic button">View File</a>
+                                {% elif document.fileType == 'png' or document.fileType == 'jpeg' or document.fileType == 'jpg' %}
+                                    <a href="{% url 'documents:openImage' document.id %}" class="ui basic button">View File</a>
+                                {% endif %}
+                            </td>
+                            <td class="center aligned">
+                                <a href="{% url 'documents:deleteDocument' document.id %}" class="ui red basic button">Delete</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                {% empty %}
+                <div class="ui info message" id="homeItemPlaceholder">
+                    <div class="header">No documents uploaded yet</div>
+                    <ul class="list"><p>Documents you upload are listed here</p></ul>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+
+{% block scripts %}
+<style>
+    .ui.table.fixed {
+        table-layout: fixed;
+    }
+    .ui.table td {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+    .truncate {
+        max-width: 100%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .ui.vertical.menu .item {
+        margin-bottom: 10px;
+    }
+    #sidebarColumn {
+        position: fixed;
+        top: 39px;
+        left: 0;
+        width: 220px;
+        background-color: #1b1c1d; /* Match the color of the top navigation bar */
+        color: white;
+        height: calc(100vh - 39px);
+        overflow-y: auto;
+        z-index: 1;
+    }
+    #mainContentColumn {
+        margin-left: 255px; /* Adjusted to match sidebar width */
+        width: calc(100% - 240px);
+        padding: 20px;
+    }
+    #homeItemCardDiv {
+        width: 100%;
+        margin-bottom: 1em;
+    }
+    #homeSearchInput {
+        width: 250px;
+    }
+    #homeSearchSystemName {
+        font-size: 28px;
+        margin-right: auto;
+    }
+    #homeSearchBtn i.search.icon {
+        color: white;
+    }
+    .ui.vertical.menu {
+        border: none;
+        width: 100%;
+    }
+    .ui.vertical.menu .item {
+        text-align: left;
+        color: white;
+    }
+    .ui.vertical.menu .item:hover {
+        background-color: #2185d0;
+    }
+    .ui.vertical.menu .header {
+        font-size: 1.2em;
+        font-weight: bold;
+        color: white;
+    }
+    .ui.grid {
+        margin: 0;
+    }
+    #homeSearchDiv {
+        margin-bottom: 20px;
+    }
+
+    #homeSegmentDiv {
+        display: flex;
+        width: 100%;
+        overflow-y: auto;
+        height: 65% !important;
+        box-sizing: border-box;
+    }
+</style>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('.ui.vertical.menu .item').on('click', function() {
+            var filter = $(this).data('filter');
+            if (filter === 'all') {
+                $('.document-item').show();
+            } else {
+                $('.document-item').hide();
+                $('.document-item[data-type="' + filter + '"]').show();
+            }
+            $('.ui.vertical.menu .item').removeClass('active');
+            $(this).addClass('active');
+        });
+    });
+</script>
+{% endblock scripts %}
+</body>
+</html>

@@ -1,0 +1,228 @@
+#navbarMainDiv{
+    display: flex;
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+    align-items: center;
+    height: fit-content;
+    justify-content: center;
+    border-bottom: 1px solid #CFD8DC;
+}
+
+#homeParentDiv, #profileParentDiv, #profileEditParentDiv, #uploadParentDiv{
+    display: flex;
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+    height: 100%;
+    border: none;
+}
+
+#profileParentDiv{ position: relative; }
+
+#profileParentDiv, #profileEditParentDiv{
+    align-items: center;
+    justify-content: center;
+}
+
+#profileSegmentDiv{
+    display: flex;
+    gap: 10px;
+    width: 70%;
+    margin: 0px;
+    border: 1px solid gray;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    padding: 20px 0px 20px 0px;
+}
+
+#homeParentDiv{ 
+    gap: 4%;
+    align-items: center;
+    flex-direction: column;
+}
+
+#homeSearchSystemName{ 
+    display: flex;
+    margin: 0px;
+    padding: 0px;
+}
+
+#homeSearchDiv{ 
+    display: flex;
+    gap: 35px;
+    border: none;
+    padding: 0px;
+    align-items: center;
+    margin: 20px 0px 0px 0px;
+    justify-content: space-between;
+}
+
+#homeSearchForm{ 
+    display: flex;
+    gap: 25px;
+    margin: 0px;
+    border: none;
+    padding: 0px;
+    height: fit-content;
+}
+
+#homeSearchBtn{ 
+    color: #FFFFFF;
+    background-color: #000000;
+}
+
+#homeSegmentDiv{ 
+    display: flex;
+    gap: 15px;
+    width: 80%;
+    margin: 0px;
+    padding: 15px;
+    overflow-y: auto;
+    height: 75% !important;
+    flex-direction: column;
+}
+
+#homeItemCardDiv{ 
+    margin: 0px;
+    padding: 0px;
+    border: none;
+}
+
+#homeItemPlaceholder{ 
+    margin: 0px;
+    width: fit-content;
+    height: fit-content !important;
+}
+
+#uploadParentDiv{ 
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#uploadSegmentDiv{ 
+    margin: 0px;
+    padding: 15px 15px 0px 15px;
+}
+
+#documentDeleteDiv{ 
+    display: flex;
+    gap: 20px;
+    border: none;
+    padding: 0px;
+    width: fit-content;
+    height: fit-content;
+    margin: 0px 0px 15px 15px;
+}
+
+#documentDeleteForm{ 
+    display: flex;
+    margin: 0px;
+    padding: 0px;
+    border: none;
+    width: fit-content;
+    height: fit-content;
+}
+
+#profileSegmentDiv img{ margin: 0px 0px 10px 0px !important; }
+
+#profileParentDiv{ 
+    gap: 5%; 
+    background-color: #BDBDBD; /* To change profile page background color */
+}
+
+#profileItemChildDiv{ 
+    display: flex;
+    margin: 0px ;
+    padding : 0px;
+    width: 80%;
+    border: none;
+    justify-content: space-between;
+}
+
+#profileInfoDiv{ 
+    display: flex;
+    width: 50%;
+    padding: 0px;
+    border: none;
+    margin: 15px 0px 0px 0px;
+    justify-content: space-between;
+}
+
+#profileLabel{ 
+    display: flex;
+    border: none;
+    margin: 0px;
+    padding: 0px;
+    border: none;
+}
+
+#profileLabel a{  white-space:nowrap !important; }
+
+#profileInfoItem{ 
+    display: flex;
+    width: 70%;
+    margin: 0px;
+    padding: 0px;
+    border: none;
+    align-items: center;
+}
+
+#profileInfoItem p{ 
+    margin: 0px;
+    padding: 0px;
+    color: #666666;
+}
+
+#profileEditBtn{  margin: 10px 0px 10px 0px; }
+
+#profileEditForm{
+    display: flex;
+    width: 50%;
+    margin: 0px;
+    padding: 0px;
+    border: none;
+    flex-direction: column;
+}
+
+#profileEditForm button{ width: fit-content; }
+
+#profileEditIconDiv{
+    display: flex;
+    gap: 20px;
+    margin: 0px;
+    padding: 0px;
+    border: none;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#profileEditIconDiv > img{
+    margin: 0px;
+    width: 100px;
+    padding: 0px;
+    height: 100px;
+    border-radius: 50%;
+}
+
+#profileEditIconDiv div{
+    display: flex;
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+    border: none;
+}
+
+#profileFieldDiv{
+    display: flex;
+    gap: 20px;
+    width: 100%;
+    padding: 0px;
+    border: none;
+    margin: 0px 0px 15px 0px;
+}
+
+#profileFieldDiv div{ width: 100%; }

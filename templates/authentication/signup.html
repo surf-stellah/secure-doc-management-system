@@ -1,0 +1,84 @@
+{% load static %}
+<head>
+    {% load widget_tweaks %} 
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+    <!--Custom css-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@600;700&display=swap" rel="stylesheet">
+
+    <!-- semantic UI -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.min.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.min.js"></script>
+
+    <title>{% block title %}Securedoc DMS - Sign Up{% endblock title %}</title>
+</head>
+
+<style>
+    .parentDiv {
+        display: flex;
+        width : 100%;
+        height: 100%;
+        align-items: center;
+        justify-content: center;
+    }
+</style>
+
+{% block content %}
+    <div class="parentDiv">
+        <div class="page-login">
+            <div class="ui centered grid container">
+                <div class="nine wide column">
+
+                    <div class="ui fluid card">
+                        <div class="content">
+                            <h3 class="ui header">Securedoc DMS<div class="sub header">Create Account</div></h3>
+                            <form class="ui form" method="POST">
+                                {% csrf_token %}
+                                <div class="field">
+                                    <label for="id_email">Email</label>
+                                    <input type="email" id="id_email" name="email" placeholder="Email">
+                                </div>
+
+                                <div class="field">
+                                    <label for="id_username">Username</label>
+                                    <input type="text" id="id_username" name="username" placeholder="Username">
+                                </div>
+
+                                <div class="field">
+                                    <label for="id_password1">Password</label>
+                                    <input type="password" id="id_password1" name="password1" placeholder="Password">
+                                </div>
+
+                                <div class="field">
+                                    <label for="id_password2">Confirm Password</label>
+                                    <input type="password" id="id_password2" name="password2" placeholder="Confirm Password">
+                                </div>
+
+                                <button class="ui primary labeled icon button" type="submit">
+                                    <i class="unlock alternate icon"></i>
+                                    Sign Up
+                                </button>
+                            </form>
+
+                            <div class="ui basic buttons">
+                                <div class="ui button"><a href="{% url 'login' %}">Already Have an Account</a></div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+{% block scripts %}
+<script type="text/javascript">
+</script>
+{% endblock scripts %}

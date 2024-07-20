@@ -1,0 +1,123 @@
+{% load static %}
+<head>
+    {% load widget_tweaks %} 
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+    <!--Custom css-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@600;700&display=swap" rel="stylesheet">
+
+    <!-- semantic UI -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.min.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.min.js"></script>
+
+    <title>{% block title %}Securedoc DMS - Login{% endblock title %}</title>
+</head>
+
+<style>
+    body {
+        background: url('https://www.codingnepalweb.com/demos/create-glassmorphism-login-form-html-css/hero-bg.jpg') no-repeat center center fixed;
+        background-size: cover;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        font-family: 'Raleway', sans-serif;
+    }
+
+    .parentDiv {
+        display: flex;
+        width: 100%;
+        height: 100%;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .glassmorphism {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        padding: 2em;
+        width: 100%;
+        max-width: 400px;
+        text-align: center;
+    }
+
+    .glassmorphism .ui.header {
+        font-size: 2.5em; /* Increase font size for the main title */
+        color: #fff;
+    }
+
+    .glassmorphism .ui.header .sub.header {
+        font-size: 1em; /* Increase font size for the subtitle */
+        color: #fff;
+    }
+
+    .glassmorphism .ui.form .field label {
+        color: #fff;
+    }
+
+    .glassmorphism .ui.button {
+        margin-top: 1em;
+    }
+
+    .glassmorphism .ui.basic.buttons .ui.button {
+        border: 1px solid #fff !important; /* White border for the buttons */
+    }
+
+    .glassmorphism .ui.basic.buttons .ui.button:hover {
+        background-color: #1e90ff !important; /* Blue background on hover */
+        color: #000 !important; /* Black text on hover */
+    }
+
+    .glassmorphism .ui.basic.buttons .ui.button a {
+        color: #fff;
+    }
+
+    .glassmorphism .ui.basic.buttons .ui.button a:hover {
+        color: #000 !important;
+    }
+</style>
+
+{% block content %}
+    <div class="parentDiv">
+        <div class="glassmorphism">
+            <h3 class="ui header">Securedoc DMS<div class="sub header">Login</div></h3>
+            <form class="ui form" method="POST">
+                {% csrf_token %}
+                <div class="field">
+                    <label>Username</label>
+                    <input type="text" name="username" placeholder="Username">
+                </div>
+
+                <div class="field">
+                    <label>Password</label>
+                    <input type="password" name="password" placeholder="Password">
+                </div>
+
+                <button class="ui primary labeled icon button" type="submit">
+                    <i class="unlock alternate icon"></i>
+                    Login
+                </button>
+            </form>
+
+            <div class="ui basic buttons">
+                <div class="ui button"><a href="{% url 'signup' %}">Create Account</a></div>
+                <div class="ui button"><a href="{% url 'profiles:resetPassword' %}">Reset Password</a></div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+{% block scripts %}
+<script type="text/javascript">
+</script>
+{% endblock scripts %}
