@@ -16,7 +16,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 @login_required
 def homeView(request):
     profile   = Profile.objects.get(user=request.user)
-    documents = Document.objects.all()
+    documents = Document.objects.filter(owner=profile)
 
     if 'search' in request.GET:
         query     = request.GET['search']
